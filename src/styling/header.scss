@@ -1,0 +1,213 @@
+// Font Families
+$font-family_1: 'Termina Test', sans-serif;
+$font-family_2: "Work Sans", sans-serif;
+
+:root {
+    --primary-color: #2CAEED;
+    --secondary-color: #6E6E6E;
+    --white-color: #fff;
+}
+
+.header_wrapper {
+    z-index: 100;
+    position: sticky;
+    top: 0;
+    background-color: var(--white-color);
+    filter: drop-shadow(0px 4px 4px rgb(0 0 0 / 8%));
+
+    .container{
+        display: flex;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        background-color: var(--white-color);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        
+        .logo_col{
+            max-width: 170px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            
+            .logo-wrapper{
+                width: 100%;
+                height: 100%;
+                object-position: center
+            }
+        }
+        
+        .manu-col{
+            max-width: calc(100% - 170px);
+            width: 100%;
+
+            
+            ul.main-menu{
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                justify-content: flex-end;
+                column-gap: 30px;
+                
+                .menu-item{
+                    position: relative;
+                    &::after{
+                        content: '';
+                        width: 0%;
+                        height: 3px;
+                        background-color: var(--primary-color);
+                        position: absolute;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        bottom: 0;
+                        z-index: 2;
+                        border-radius: 10px;
+                        transition: 0.3s all;
+                        // transform: translate(-0);
+                    }
+                    &:has(.active){
+                        &::after{
+                            width: 100%;
+                        }
+                        .nav-link{
+                            color: var(--primary-color);
+                        }
+                    }
+                    &:hover::after{
+                        width: 100%;
+                    }
+                    &.home{
+                        display: none;
+                    }
+                }
+                
+                .nav-link{
+                    text-decoration: none;
+                    font-family: $font-family_2;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 21px;
+                    color: var(--secondary-color);
+                    padding: 12px 0px;
+                    transition: 0.3s all;
+                    text-transform: uppercase;
+                    
+                    &:hover {
+                        color: var(--primary-color) !important;
+                    }
+
+                }
+            }
+        }
+
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .header_wrapper .container{
+        .manu-col {
+            ul.main-menu{
+                column-gap: 15px !important;
+                .menu-item{
+                    &::after{
+                        height: 2px;
+                    }
+                    .nav-link{
+                        font-size: 16px;  
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (min-width: 1025px) {
+    .header_wrapper .container{
+        .logo_col{
+            .menu_icon{
+                display: none;
+            }
+        }
+    }
+    body.active-mobile-menu{
+        overflow: auto;
+    }
+     
+}
+@media only screen and (max-width: 1024px) {
+    .header_wrapper .container{
+        .manu-col{
+           opacity: 0;
+           visibility: hidden;
+           height: 0vh;
+           transition: 0.3s all;
+           position: fixed;
+           top: 80px;
+           background-color: var(--white-color);
+           max-width: 100%;
+           left: 0;
+           justify-content: space-between;
+           .main-menu{
+                flex-direction: column;
+                padding: 20px !important;
+                height: 100%;
+                align-items: flex-start;
+                justify-content: unset !important;
+                overflow: auto;
+                padding-bottom: 150px;
+                .menu-item{
+                    width: 100%;
+                }
+            }
+        }
+        .logo_col{
+            max-width: 100%;
+            justify-content: space-between;
+            .logo-wrapper{
+                max-width: 170px;
+            }
+            .menu_icon{
+                width: 25px;
+                height: 14px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                cursor: pointer;
+                background-color: transparent;
+                border: none;
+                outline: none;
+
+                .menu_bar{
+                    width: 100%;
+                    height: 2px;
+                    background-color: #112b36;
+                    transition: all 0.5s ease-in-out;
+                }
+            }
+        }
+    }
+
+    body.active-mobile-menu{
+        overflow: hidden;
+        .menu_bar1{
+            transform: rotate(-45deg) translate(-2px, 5px);
+        }
+        .menu_bar2{
+            opacity: 0;
+        }
+        .menu_bar3{
+            transform: rotate(45deg) translate(-3px, -7px);
+        }
+        .header_wrapper{
+            .manu-col{
+                opacity: 1;
+                visibility: visible;
+                height: 100vh;
+                
+            }
+        }
+    }
+}
